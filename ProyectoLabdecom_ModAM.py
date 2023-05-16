@@ -10,7 +10,7 @@ from matplotlib.figure import Figure
 from scipy import signal
 
 
-
+#Holaa
 root = tk.Tk()
 root.geometry("750x420+100+100")
 root.title("GENERADOR :)")
