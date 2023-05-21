@@ -10,7 +10,6 @@ from matplotlib.figure import Figure
 from scipy import signal
 
 
-#Holaa
 root = tk.Tk()
 root.geometry("750x420+100+100")
 root.title("GENERADOR :)")
@@ -18,14 +17,13 @@ root.resizable(False, False)
 root.configure(background='black')
 
 def valida_fre(frecuencia_str):
-    if frecuencia_str.isdigit():
+    if frecuencia_str.isdigit() or frecuencia_str == "":
         return True
     else:
         return False
                
 def valida_amp(a_str):
-
-    if a_str.isdigit():
+    if a_str.isdigit() or a_str == "":
         return True
     else:
          return False  
@@ -48,17 +46,11 @@ amplitud_usuario.place(x=80,y=377)
 
 
 def Mensaje () :
-
-    
     moduladora = A_sm*np.cos(2*np.pi*f_sm*t_s)
     plt.title('Señal de Mensaje 4KHz')
     plt.plot(moduladora,'g')
     plt.ylabel('Amplitud')
     plt.show()
-
-
-
-
 
 # Icono de la ventana.
 #root.iconbitmap("D:\img3.ico")
@@ -97,16 +89,14 @@ def datos():
             plt.title('Señal de Portadora')
             plt.plot(portadora,'r')
             plt.ylabel('Amplitud')  
-
             plt.show()
+
         else:
             plt.clf()
             plt.plot(t, signal.square(2 * np.pi * 5 * t))
             plt.ylabel('Amplitud')
             plt.title('Onda Cuadrada')
             plt.show()
-            
-
 
     else:
         messagebox.showinfo(message= "Por favor, seleccione una opción :)", title="Aviso")
@@ -140,12 +130,9 @@ combo1.place(x=25, y=40)
 
 def grafica2():
     comb = combo1.get()
-   
-
     if (comb == "AM") :
         frecuencia_str = frecuencia_usuario.get()
         a_str = amplitud_usuario.get()
-
 
         if frecuencia_str == '' or a_str == '':
             tk.messagebox.showerror('Error', 'Debe ingresar una frecuencia y una Amplitud')
@@ -173,6 +160,11 @@ def comparar():
     
     frecuencia_str = frecuencia_usuario.get()
     a_str = amplitud_usuario.get()
+
+    if frecuencia_str == '' or a_str == '':
+        tk.messagebox.showerror('Error', 'Debe ingresar una frecuencia y una Amplitud')
+        return
+
     f_sp = float(frecuencia_str) #frecuencia de la portadora
     A_sp = float(a_str) #amplitud de la moduladora
     modulacion_AM = A_sp*(1+ka*np.cos(2*np.cos(2*np.pi*f_sm*t_s))*np.cos(2*np.pi*f_sp*t_s))
